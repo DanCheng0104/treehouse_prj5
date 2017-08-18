@@ -1,0 +1,47 @@
+@charset "UTF-8";
+body {
+  background: #fcfcfc;
+  font-family: "Montserrat", sans-serif; 
+}
+
+.grid{
+	display:grid;
+	margin: auto;
+	width: 89.5%;
+	height:90%;
+	grid-template-columns: 30% 30% 30%;
+	grid-auto-rows: 200px;
+	grid-gap:30px;
+}
+
+div.box:hover{
+	border:3px solid #e2e0e0;
+
+}
+
+.box{
+	border:1px solid #e2e0e0;
+	border-radius: 15px;
+	background: #ffffff;
+}
+
+h3 {
+    color: black;
+    font: helvetica;
+
+}
+
+.box img{
+	float:left;
+	width:150px;
+	height:150px;
+	border-radius: 50%;
+	margin-left: 25px;
+	margin-top: 25px;
+}
+
+.box .sideText{
+	float:right;
+	margin-right: 7%;
+    margin-top: 5%;
+}
