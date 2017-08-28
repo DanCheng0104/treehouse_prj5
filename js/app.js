@@ -1,5 +1,7 @@
 
 (function($) {
+	let ems_all = [];
+	
 	function titleCase(str) {
 	   let splitStr = str.toLowerCase().split(' ');
 	   for (var i = 0; i < splitStr.length; i++) {
@@ -18,8 +20,7 @@
 	 .done((data) => processResults(data.results))
 	 .fail((xhr) => console.log('error', xhr));
 
-	 function processResults(results){
-		let ems_all = [];
+	 function processResults(results){		
 		results.forEach(ems=>{
 	    	let ppl = new Map();
 	    	ppl.set('name',titleCase(`${ems.name.first} ${ems.name.last}`));
@@ -32,6 +33,18 @@
 	    	ems_all.push(ppl);		   	
 		 });
 		 populateBox(ems_all);	
+	 }
+
+	 function displayEmployee(ems,index){
+		$('.modal-content').attr('index',index);
+		$("#myModal").modal('show');  
+		$('.modal-header img').attr("src",ems.get('picture'));
+		$('.pname').html(ems.get('name'));
+		$('.email').html(ems.get('email'));
+		$('.city').html(titleCase(ems.get('city')));
+		$('.cell').html(ems.get('cell'));
+		$('.location').html(ems.get('location'));
+		$('.dob').html(`Birthday: ${ems.get('dob')}`);
 	 }
 
 	 function populateBox(inputs){
@@ -47,7 +60,31 @@
 		    $('.grid').append(html);
 	 	}
 
+		$("#myModal").modal({show:false});  
+
+		$('.box').on('click',function(event){
+		 	let targetName = this.lastElementChild.firstElementChild.textContent;		 		
+	 		ems_all.forEach((ems,index)=>{
+	 			if (ems.get('name') === targetName){
+	 				displayEmployee(ems,index)
+	 			}			
+	 		})
+		})
+
+
+		$('.nav.right').on('click',function(){
+			let index =parseInt($(this.parentElement).attr('index'));
+			index =(index ===11?-1:index);
+			displayEmployee(ems_all[index+1],index+1);
+		}) 	
+		$('.nav.left').on('click',function(){
+			let index =parseInt($(this.parentElement).attr('index'));
+			index=(index ===0?12:index);
+			displayEmployee(ems_all[index-1],index-1);
+		}) 
 	 }
+
+
 
 })(jQuery);
 

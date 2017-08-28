@@ -4,12 +4,46 @@
 	<meta charset="UTF-8">
 	<title>Employee Profile</title>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src ='js/app.js'></script>
 <body>
 	<h1>AWESOME STARTUP EMPLOYEE DIRECTORY</h1>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <img/>
+		<div class="modalText">
+			<h3 class='pname'></h3>
+			<p class='email'></p>
+			<p class='city'></p>
+		</div>
+      </div>
+      <div class="modal-body">
+        	<p class='cell'></p>
+			<p class='location'></p>
+			<p class='dob'></p>
+      </div>
+	  <a class='nav right' href="#">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+	  <a class='nav left' href="#">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </div>
+
+  </div>
+</div>
+ 
 	<div class="grid">
 	</div>
 </body>

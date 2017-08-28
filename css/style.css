@@ -4,14 +4,14 @@ body {
   font-family: "Montserrat", sans-serif; 
 }
 
-.grid{
-	display:grid;
-	margin: auto;
-	width: 89.5%;
-	height:90%;
-	grid-template-columns: 30% 30% 30%;
-	grid-auto-rows: 200px;
-	grid-gap:30px;
+.grid {
+    display: grid;
+    margin: auto;
+    width: 100%;
+    height: 90%;
+    grid-template-columns: 33% 33% 33%;
+    grid-auto-rows: 200px;
+    grid-gap: 10px;
 }
 
 div.box:hover{
@@ -40,8 +40,63 @@ h3 {
 	margin-top: 25px;
 }
 
-.box .sideText{
-	float:right;
-	margin-right: 7%;
-    margin-top: 5%;
+.box .sideText {
+    float: right;
+  /*  width: 51%;*/
+    margin-top: 3%;
+    position: absolute;
+    margin-left: 13%;
 }
+
+#myModal {
+    border-radius: 5%;
+}
+
+.modal-content{
+	width:400px;
+	height:450px;
+	left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+    top: 0;
+}
+
+.modal-header{
+	height:300px;
+}
+
+.modal-header img{
+	position: absolute;
+    margin: auto;
+    top: 50px;
+    left: 0;
+    right: 0;
+    border-radius: 50%;
+}
+
+.modalText{
+	position: absolute;
+    top: 160px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+.modal-body{
+    text-align: center;	
+}
+
+/*nav arrows*/
+.nav {
+	position: absolute;
+	top:100px;
+}
+
+.right{
+	right:15px;
+}
+.left{
+	left:15px;
+}
+
