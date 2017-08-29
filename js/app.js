@@ -1,17 +1,7 @@
-
+//i am using css grid to populate employee info
 (function($) {
 	let ems_all = [];
-	
-	function titleCase(str) {
-	   let splitStr = str.toLowerCase().split(' ');
-	   for (var i = 0; i < splitStr.length; i++) {
-	       // You do not need to check if i is larger than splitStr length, as your for does that for you
-	       // Assign it back to the array
-	       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
-	   }
-	   // Directly return the joined string
-	   return splitStr.join(' '); 
-	}
+	//ajax call to get random 12 users and use promise to process the results
 	$.ajax({
 	    url: "https://randomuser.me/api",
 	    method: "GET",
@@ -19,34 +9,40 @@
 	 })
 	 .done((data) => processResults(data.results))
 	 .fail((xhr) => console.log('error', xhr));
-
+      
+      //create map for each result and push it to the ems_all array.
 	 function processResults(results){		
 		results.forEach(ems=>{
 	    	let ppl = new Map();
 	    	ppl.set('name',titleCase(`${ems.name.first} ${ems.name.last}`));
 	    	ppl.set('email',ems.email);
-	    	ppl.set('city',ems.location.city);
+	    	//capitalize the first character
+	    	ppl.set('city',ems.location.city.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}));
 	    	ppl.set('picture',ems.picture.large);
 	    	ppl.set('cell',ems.cell);
-	    	ppl.set('location',`${ems.location.street},${ems.location.city},${ems.location.state},${ems.location.postcode}`);
+	    	let street = ems.location.street.replace(/\b[a-z]/g,function(f){return f.toUpperCase();});
+	    	let city = ems.location.city.replace(/\b[a-z]/g,function(f){return f.toUpperCase();});
+	    	let state = ems.location.state.replace(/\b[a-z]/g,function(f){return f.toUpperCase();});
+	    	ppl.set('location',`${street}, ${city}, ${state}, ${ems.location.postcode}`);
 	    	ppl.set('dob',ems.dob.split(' ')[0]);
 	    	ems_all.push(ppl);		   	
 		 });
 		 populateBox(ems_all);	
 	 }
-
+	 //display full employee information when you click the employee box
 	 function displayEmployee(ems,index){
 		$('.modal-content').attr('index',index);
 		$("#myModal").modal('show');  
 		$('.modal-header img').attr("src",ems.get('picture'));
 		$('.pname').html(ems.get('name'));
 		$('.email').html(ems.get('email'));
-		$('.city').html(titleCase(ems.get('city')));
+		$('.city').html(ems.get('city'));
 		$('.cell').html(ems.get('cell'));
 		$('.location').html(ems.get('location'));
 		$('.dob').html(`Birthday: ${ems.get('dob')}`);
 	 }
 
+	 //populate employee info
 	 function populateBox(inputs){
 	 	for (let input of inputs){
 	 		let html = `<div class="box">
@@ -59,9 +55,9 @@
 		 				</div>`
 		    $('.grid').append(html);
 	 	}
-
+	 	//hide the modal by default
 		$("#myModal").modal({show:false});  
-
+		//show detailed employee info when clicking the box
 		$('.box').on('click',function(event){
 		 	let targetName = this.lastElementChild.firstElementChild.textContent;		 		
 	 		ems_all.forEach((ems,index)=>{
@@ -71,20 +67,19 @@
 	 		})
 		})
 
-
+		//nav right button click
 		$('.nav.right').on('click',function(){
 			let index =parseInt($(this.parentElement).attr('index'));
 			index =(index ===11?-1:index);
 			displayEmployee(ems_all[index+1],index+1);
 		}) 	
+		//nav left button click
 		$('.nav.left').on('click',function(){
 			let index =parseInt($(this.parentElement).attr('index'));
 			index=(index ===0?12:index);
 			displayEmployee(ems_all[index-1],index-1);
 		}) 
 	 }
-
-
 
 })(jQuery);
 
