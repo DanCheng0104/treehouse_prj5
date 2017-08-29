@@ -14,7 +14,9 @@
 	 function processResults(results){		
 		results.forEach(ems=>{
 	    	let ppl = new Map();
-	    	ppl.set('name',titleCase(`${ems.name.first} ${ems.name.last}`));
+	    	let firstName = ems.name.first.replace(/\b[a-z]/g,function(f){return f.toUpperCase();});
+	    	let lastName = ems.name.last.replace(/\b[a-z]/g,function(f){return f.toUpperCase();});
+	    	ppl.set('name',`${firstName} ${lastName}`);
 	    	ppl.set('email',ems.email);
 	    	//capitalize the first character
 	    	ppl.set('city',ems.location.city.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}));
